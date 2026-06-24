@@ -24,13 +24,16 @@ class EnquiryController extends Controller
         $enquiry = new Enquiry();
         $enquiry->name = $validated['name'];
         $enquiry->email = $validated['email'];
-        $enquiry->phone = $validated['phone'];
+        $enquiry->phone_number = $validated['phone'];
         $enquiry->message = $validated['message'];
-        $enquiry->state = $request->state;
-        $enquiry->city = $request->city;
-        $enquiry->product = $request->product;
+        $enquiry->state = '';
+        $enquiry->city = $request->city ?? "";
+        $enquiry->product = $request->product ?? "";
         $enquiry->save();
 
-        return Redirect::route('home')->with('msg_success', 'Enquiry added successfully!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Enquiry submitted successfully'
+        ]);
     }
 }

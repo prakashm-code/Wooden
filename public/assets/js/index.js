@@ -66,32 +66,53 @@ function closeModal() {
 }
 
 function submitEnquiry() {
-    const name = document.getElementById("enqName").value.trim();
-    const phone = document.getElementById("enqPhone").value.trim();
+    const form = document.getElementById("enquiryForm");
 
-    if (!name) {
-        shakeInput("enqName");
-        return;
-    }
-    if (!phone) {
-        shakeInput("enqPhone");
+    if (!form.checkValidity()) {
+        form.reportValidity();
         return;
     }
 
-    // Show loading
     const btn = document.querySelector(".modal-submit");
-    btn.textContent = "Sending...";
+
+    btn.innerHTML = "Sending...";
     btn.disabled = true;
 
-    setTimeout(() => {
-        btn.style.display = "none";
-        document.querySelector(".modal-header").style.display = "none";
-        document.querySelector(".modal-body").style.display = "none";
-        document.getElementById("modalSuccess").classList.add("show");
+    const formData = new FormData(form);
 
-        // Auto close after 3s
-        setTimeout(closeModal, 3000);
-    }, 1200);
+    fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+            "X-Requested-With": "XMLHttpRequest",
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                btn.style.display = "none";
+                document.querySelector(".modal-header").style.display = "none";
+                document.querySelector(".modal-body").style.display = "none";
+                document.getElementById("modalSuccess").classList.add("show");
+
+                setTimeout(closeModal, 3000);
+
+                form.reset();
+            } else {
+                btn.innerHTML = "Send Enquiry →";
+                btn.disabled = false;
+
+                alert(data.message || "Something went wrong.");
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+
+            btn.innerHTML = "Send Enquiry →";
+            btn.disabled = false;
+
+            alert("Unable to submit enquiry.");
+        });
 }
 
 function shakeInput(id) {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/listing', [HomeController::class, 'listing'])->name('listing');
+Route::post('/storeEnquiry', [EnquiryController::class, 'storeEnquiry'])->name('enquiry.store');
 Route::get('/admin', function () {
     return redirect()->route('login');
 });
