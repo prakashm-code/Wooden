@@ -17,7 +17,7 @@
     <ul class="menu-inner py-1">
 
         {{-- DASHBOARD --}}
-        <li class="menu-item {{ in_array(Request::segment(1), ['dashboard', 'outlet_dashboard']) ? 'active' : '' }}">
+        <li class="menu-item {{ in_array(Request::segment(2), ['dashboard', 'outlet_dashboard']) ? 'active' : '' }}">
             <a href="{{ $role === 'super_admin' ? route('dashboard') : route('outlet_dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-dashboard"></i>
                 <div>Dashboard</div>
@@ -26,14 +26,14 @@
 
 
         <li
-            class="menu-item {{ in_array(Request::segment(1), ['plywoods', 'add_plywood', 'plywood_edit']) ? 'active' : '' }}">
+            class="menu-item {{ in_array(Request::segment(2), ['plywoods', 'add_plywood', 'plywood_edit']) ? 'active' : '' }}">
             <a href="{{ route('plywoods') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-layer"></i>
                 <div>Plywoods</div>
             </a>
         </li>
 
-        <li class="menu-item {{ in_array(Request::segment(1), ['doors', 'add_door', 'door_edit']) ? 'active' : '' }}">
+        <li class="menu-item {{ in_array(Request::segment(2), ['doors', 'add_door', 'door_edit']) ? 'active' : '' }}">
             <a href="{{ route('doors') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-door-open"></i>
                 <div>Doors</div>
@@ -41,19 +41,19 @@
         </li>
 
         <li
-            class="menu-item {{ in_array(Request::segment(1), ['blockboards', 'add_blockboard', 'blockboard_edit']) ? 'active' : '' }}">
+            class="menu-item {{ in_array(Request::segment(2), ['blockboards', 'add_blockboard', 'blockboard_edit']) ? 'active' : '' }}">
             <a href="{{ route('blockboards') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-grid-alt"></i>
                 <div>BlockBoards</div>
             </a>
         </li>
-        <li class="menu-item ">
+        <li class="menu-item {{ Request::segment(2) == 'enquiries' ? 'active' : '' }}">
             <a href="{{ route('enquiries') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-message-detail"></i>
                 <div>Enquiries</div>
             </a>
         </li>
-        <li class="menu-item {{ Request::segment(1) == 'settings' ? 'active' : '' }}">
+        <li class="menu-item {{ Request::segment(2) == 'settings' ? 'active' : '' }}">
             <a href="{{ route('setting') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div>Settings</div>

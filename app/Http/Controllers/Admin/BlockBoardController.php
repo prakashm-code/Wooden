@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\MenuItem;
 use Illuminate\Http\Request;
@@ -44,18 +45,29 @@ class BlockBoardController extends Controller
             'price' => 'nullable|numeric|min:0',
             'market_price' => 'nullable|numeric|min:0',
 
-            // 'tax_percentage' => 'nullable|numeric|min:0|max:100',
-            // 'qty' => 'required|integer|min:1',
         ]);
         try {
             $menu = new BlockBoard();
             $menu->name          = $validated['name'];
             $menu->price    = $validated['price'];
-            // $menu->tax_percentage    = $validated['tax_percentage'];
-            // $menu->qty     = $validated['qty'];
+            $menu->market_price  = $validated['market_price'];
+            if ($request->hasFile('image')) {
+                $file      = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename  = time() . '.' . $extension;
+
+                $uploadPath = public_path('admin/uploads/blockboards/');
+
+                if (!file_exists($uploadPath)) {
+                    mkdir($uploadPath, 0755, true);
+                }
+
+                $file->move($uploadPath, $filename);
+                $menu->image = $filename;
+            }
             $menu->save();
 
-            return redirect()->route('menus')->with('msg_success', 'BlockBoard added successfully!');
+            return redirect()->route('blockboards')->with('msg_success', 'BlockBoard added successfully!');
         } catch (QueryException $e) {
             return redirect()->back()->with('msg_error', 'BlockBoard not added' . $e->getMessage());
         }
@@ -102,15 +114,37 @@ class BlockBoardController extends Controller
             $validated = $request->validate([
                 'name'          => 'required|string|max:255',
                 'price'    => 'required|numeric|min:0',
+                'market_price' => 'nullable|numeric|min:0',
             ]);
 
             $menu->name          = $validated['name'];
             $menu->price    = $validated['price'];
+            $menu->market_price  = $validated['market_price'];
+            if ($request->hasFile('image')) {
+                if ($menu->image) {
+                    $oldImagePath = public_path('admin/uploads/blockboards/' . $menu->image);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
 
+                $file      = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename  = time() . '.' . $extension;
+
+                $uploadPath = public_path('admin/uploads/blockboards/');
+
+                if (!file_exists($uploadPath)) {
+                    mkdir($uploadPath, 0755, true);
+                }
+
+                $file->move($uploadPath, $filename);
+                $menu->image = $filename;
+            }
 
             $menu->save();
 
-            return redirect()->route('menus')->with('msg_success', 'BlockBoard edited successfully!');
+            return redirect()->route('blockboards')->with('msg_success', 'BlockBoard edited successfully!');
         } catch (QueryException $e) {
             DB::rollBack();
             return redirect()->back()->with('msg_error', 'BlockBoard not Updated' . $e->getMessage());

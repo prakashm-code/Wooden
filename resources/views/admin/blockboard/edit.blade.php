@@ -35,7 +35,33 @@
                                         <input type="number" class="form-control " id="qty" name="qty"
                                             placeholder="e.g. 1">
                                     </div> --}}
+                                    <div class="mb-6">
+                                        <label class="form-label">Item Image</label>
 
+                                        {{-- Current / Preview Image --}}
+                                        <div class="mb-3">
+                                            @if (!empty($data['image']))
+                                                <img id="image_preview"
+                                                    src="{{ asset('admin/uploads/blockboards/' . $data['image']) }}"
+                                                    alt="Menu Item Image"
+                                                    style="width: 160px; height: 160px; object-fit: cover;
+                                                           border-radius: 10px; border: 2px solid #e0e0e0;">
+                                            @else
+                                                <img id="image_preview"
+                                                    src="{{ asset('assets/img/placeholder-food.png') }}" alt="No Image"
+                                                    style="width: 160px; height: 160px; object-fit: cover;
+                                                           border-radius: 10px; border: 2px dashed #ccc;
+                                                           display: none;">
+                                            @endif
+                                        </div>
+
+                                        {{-- File Input to Replace Image --}}
+                                        <input type="file" class="form-control" id="image" name="image"
+                                            accept="image/*">
+                                        <div class="form-text text-muted mt-1">
+                                            Leave empty to keep the current image. Accepted: JPG, PNG, WEBP. Max: 2MB.
+                                        </div>
+                                    </div>
                                     <button type="submit" class="btn btn-primary">
                                         Save Menu
                                     </button>
@@ -45,3 +71,20 @@
                     </div>
                 </div>
             </div>
+
+
+            <script>
+                document.getElementById('image').addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    const preview = document.getElementById('image_preview');
+
+                    if (file && file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            preview.src = event.target.result;
+                            preview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            </script>

@@ -46,18 +46,29 @@ class DoorController extends Controller
             'price' => 'nullable|numeric|min:0',
             'market_price' => 'nullable|numeric|min:0',
 
-            // 'tax_percentage' => 'nullable|numeric|min:0|max:100',
-            // 'qty' => 'required|integer|min:1',
         ]);
         try {
             $menu = new Door();
             $menu->name          = $validated['name'];
             $menu->price    = $validated['price'];
-            // $menu->tax_percentage    = $validated['tax_percentage'];
-            // $menu->qty     = $validated['qty'];
+            $menu->market_price  = $validated['market_price'];
+            if ($request->hasFile('image')) {
+                $file      = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename  = time() . '.' . $extension;
+
+                $uploadPath = public_path('admin/uploads/doors/');
+
+                if (!file_exists($uploadPath)) {
+                    mkdir($uploadPath, 0755, true);
+                }
+
+                $file->move($uploadPath, $filename);
+                $menu->image = $filename;
+            }
             $menu->save();
 
-            return redirect()->route('menus')->with('msg_success', 'Door added successfully!');
+            return redirect()->route('doors')->with('msg_success', 'Door added successfully!');
         } catch (QueryException $e) {
             return redirect()->back()->with('msg_error', 'Door not added' . $e->getMessage());
         }
@@ -104,15 +115,39 @@ class DoorController extends Controller
             $validated = $request->validate([
                 'name'          => 'required|string|max:255',
                 'price'    => 'required|numeric|min:0',
+                'market_price' => 'nullable|numeric|min:0',
             ]);
+
 
             $menu->name          = $validated['name'];
             $menu->price    = $validated['price'];
+            $menu->market_price  = $validated['market_price'];
+            if ($request->hasFile('image')) {
+                if ($menu->image) {
+                    $oldImagePath = public_path('admin/uploads/doors/' . $menu->image);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                $file      = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename  = time() . '.' . $extension;
+
+                $uploadPath = public_path('admin/uploads/doors/');
+
+                if (!file_exists($uploadPath)) {
+                    mkdir($uploadPath, 0755, true);
+                }
+
+                $file->move($uploadPath, $filename);
+                $menu->image = $filename;
+            }
 
 
             $menu->save();
 
-            return redirect()->route('menus')->with('msg_success', 'Door edited successfully!');
+            return redirect()->route('doors')->with('msg_success', 'Door edited successfully!');
         } catch (QueryException $e) {
             DB::rollBack();
             return redirect()->back()->with('msg_error', 'Door not Updated' . $e->getMessage());

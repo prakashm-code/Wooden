@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Setting;
+use App\Models\StoreSetting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -23,16 +24,14 @@ class SettingController
         $js = ['setting'];
         $outlet_id = 11;
 
-        $settings = Setting::first();
+        $settings = StoreSetting::first();
         if (!$settings) {
-            $settings = Setting::create([
-                'gst_percentage' => 5,
-                'parcel_charge_per_item' => 0,
-                'total_tables' => 10,
+            $settings = StoreSetting::create([
+                'name' => 'My Store',
                 'address' => '',
                 'phone' => '',
                 'email' => '',
-                'outlet_id' => $outlet_id
+                'gst_number' => '',
             ]);
         }
 
@@ -51,30 +50,48 @@ class SettingController
 
     public function update(Request $request)
     {
-        // dd($request);
         $request->validate([
-            'restaurant_name' => 'required|string|max:255',
-            'address' => 'required|string',
+            'name'  => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'email' => 'required|email',
-            // 'gst_percentage' => 'required|numeric|min:0',
-            'parcel_charge_per_item' => 'required|numeric|min:0',
-            // 'total_tables' => 'required|integer|min:1',
+            // 'logo'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            // 'favicon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,ico,webp|max:512',
         ]);
 
-        $outlet_id = auth()->user()->outlet_id;
+        $setting = StoreSetting::first();
+        $setting->name       = $request->name;
+        $setting->address    = $request->address;
+        $setting->phone      = $request->phone;
+        $setting->email      = $request->email;
+        $setting->gst_number = $request->gst_number ?? '';
 
-        $setting = Setting::where('outlet_id', $outlet_id)->first();
+        $uploadPath = public_path('admin/uploads/settings/');
+        if (!file_exists($uploadPath)) {
+            mkdir($uploadPath, 0755, true);
+        }
 
-        // $setting = new Setting();
-        $setting->restaurant_name = $request->restaurant_name;
-        $setting->address = $request->address;
-        $setting->phone = $request->phone;
-        $setting->email = $request->email;
-        $setting->gst_number = $request->gst_number;
-        // $setting->gst_percentage = $request->gst_percentage;
-        $setting->parcel_charge_per_item = $request->parcel_charge_per_item;
-        // $setting->total_tables = $request->total_tables;
+        // Logo
+        if ($request->hasFile('logo')) {
+            if ($setting->logo && file_exists(public_path('admin/uploads/settings/' . $setting->logo))) {
+                unlink(public_path('admin/uploads/settings/' . $setting->logo));
+            }
+            $file = $request->file('logo');
+            $filename = time() . '_logo.' . $file->getClientOriginalExtension();
+            $file->move($uploadPath, $filename);
+            $setting->logo = $filename;
+        }
+
+        // Favicon
+        if ($request->hasFile('favicon')) {
+            if ($setting->favicon && file_exists(public_path('admin/uploads/settings/' . $setting->favicon))) {
+                unlink(public_path('admin/uploads/settings/' . $setting->favicon));
+            }
+            $file = $request->file('favicon');
+            $filename = time() . '_favicon.' . $file->getClientOriginalExtension();
+            $file->move($uploadPath, $filename);
+            $setting->favicon = $filename;
+        }
+
         $setting->save();
 
         return back()->with('msg_success', 'Settings Updated Successfully');

@@ -14,9 +14,10 @@ use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\TableController;
 use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Api\BranchController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // Route::get('/outlet_dashboard', [DashboardController::class, 'outlet_index'])->name('outlet_dashboard');
@@ -57,4 +58,12 @@ Route::middleware('auth')->group(function () {
 
 
 
+});
+
+Route::get('/admin', function () {
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+
+    return redirect()->route('login');
 });

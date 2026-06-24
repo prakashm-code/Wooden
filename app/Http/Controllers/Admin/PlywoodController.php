@@ -40,26 +40,38 @@ class PlywoodController extends Controller
     public function store(Request $request)
     {
 
-        // ✅ Validation
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'nullable|numeric|min:0',
+            'name'         => 'required|string|max:255',
+            'price'        => 'nullable|numeric|min:0',
             'market_price' => 'nullable|numeric|min:0',
-
-            // 'tax_percentage' => 'nullable|numeric|min:0|max:100',
-            // 'qty' => 'required|integer|min:1',
         ]);
+
         try {
-            $menu = new Plywood();
+            $menu                = new Plywood();
             $menu->name          = $validated['name'];
-            $menu->price    = $validated['price'];
-            // $menu->tax_percentage    = $validated['tax_percentage'];
-            // $menu->qty     = $validated['qty'];
+            $menu->price         = $validated['price'];
+            $menu->market_price  = $validated['market_price'];
+
+            if ($request->hasFile('image')) {
+                $file      = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename  = time() . '.' . $extension;
+
+                $uploadPath = public_path('admin/uploads/plywoods/');
+
+                if (!file_exists($uploadPath)) {
+                    mkdir($uploadPath, 0755, true);
+                }
+
+                $file->move($uploadPath, $filename);
+                $menu->image = $filename;
+            }
+
             $menu->save();
 
-            return redirect()->route('menus')->with('msg_success', 'Plywood added successfully!');
+            return redirect()->route('plywoods')->with('msg_success', 'Plywood added successfully!');
         } catch (QueryException $e) {
-            return redirect()->back()->with('msg_error', 'Plywood not added' . $e->getMessage());
+            return redirect()->back()->with('msg_error', 'Plywood not added: ' . $e->getMessage());
         }
     }
 
@@ -104,12 +116,34 @@ class PlywoodController extends Controller
             $validated = $request->validate([
                 'name'          => 'required|string|max:255',
                 'price'    => 'required|numeric|min:0',
+                'market_price' => 'nullable|numeric|min:0',
             ]);
 
             $menu->name          = $validated['name'];
             $menu->price    = $validated['price'];
+            $menu->market_price  = $validated['market_price'];
 
+            if ($request->hasFile('image')) {
+                if ($menu->image) {
+                    $oldImagePath = public_path('admin/uploads/plywoods/' . $menu->image);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
 
+                $file      = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename  = time() . '.' . $extension;
+
+                $uploadPath = public_path('admin/uploads/plywoods/');
+
+                if (!file_exists($uploadPath)) {
+                    mkdir($uploadPath, 0755, true);
+                }
+
+                $file->move($uploadPath, $filename);
+                $menu->image = $filename;
+            }
             $menu->save();
 
             return redirect()->route('menus')->with('msg_success', 'Plywood edited successfully!');

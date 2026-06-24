@@ -35,7 +35,9 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact" class="nav-cta">Contact Us</a></li>
             </ul>
-            <div class="nav-phone">📞 1800-000-1234</div>
+            @if ($settings->phone)
+                <div class="nav-phone">📞 {{ $settings->phone }}</div>
+            @endif
             <button class="hamburger" id="hamburger">☰</button>
         </div>
     </nav>
@@ -103,7 +105,10 @@
     <!-- ========== FEATURES STRIP ========== -->
     <section class="features-strip">
         <div class="strip-container">
-            <div class="strip-item"><span class="strip-icon">💧</span><span>Boiling Waterproof</span></div>
+            <div class="strip-item"><span class="strip-icon"><img class="strip-icon-img"
+                        src="{{ asset('assets/icons/waterproof.png') }}" alt="Waterproof"> </span><span>Boiling
+                    Waterproof</span>
+            </div>
             <div class="strip-item"><span class="strip-icon">🔥</span><span>Fire Retardant</span></div>
             <div class="strip-item"><span class="strip-icon">🪲</span><span>Termite Proof</span></div>
             <div class="strip-item"><span class="strip-icon">🏆</span><span>30-Year Warranty</span></div>
@@ -117,6 +122,98 @@
         </div>
     </section>
 
+    <section class="about-us" id="about">
+        <div class="about-container">
+
+            <!-- Left: Image Block -->
+            <div class="about-img-block reveal">
+                <div class="about-img-main-wrap">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=85"
+                        alt="WoodCraft Factory" class="about-img-main" />
+                    <div class="about-img-badge">
+                        <span class="badge-number">30+</span>
+                        <span class="badge-text">Years of<br>Excellence</span>
+                    </div>
+                </div>
+                <div class="about-img-secondary-wrap">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=85"
+                        alt="WoodCraft Workshop" class="about-img-secondary" />
+                </div>
+                <!-- Decorative dots -->
+                <div class="about-dots">
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <defs>
+                            <pattern id="dot-pattern" x="0" y="0" width="12" height="12"
+                                patternUnits="userSpaceOnUse">
+                                <circle cx="2" cy="2" r="2" fill="var(--red)" opacity="0.25" />
+                            </pattern>
+                        </defs>
+                        <rect width="120" height="120" fill="url(#dot-pattern)" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Right: Content -->
+            <div class="about-content">
+                <p class="about-eyebrow reveal-line">Our Story</p>
+
+                <h2 class="about-title reveal">
+                    Crafting Trust Since<br />
+                    <span class="about-accent">1992</span>
+                </h2>
+
+                <!-- Animated line -->
+                <div class="about-line-anim reveal">
+                    <span class="line-segment seg1"></span>
+                    <span class="line-segment seg2"></span>
+                    <span class="line-dot"></span>
+                </div>
+
+                <p class="about-desc reveal">
+                    WoodCraft Premium was founded with a simple vision — to bring superior-quality plywood and wood
+                    products to homes and businesses across the country. Over the years, we have earned the trust of
+                    thousands of customers by consistently delivering strength, durability, and craftsmanship in every
+                    product we create.
+                </p>
+
+                <p class="about-desc reveal">
+                    Every sheet of plywood, board, and door that leaves our facility undergoes over 100 rigorous quality
+                    checks to ensure exceptional performance and reliability. Our commitment to innovation, quality, and
+                    customer satisfaction has made WoodCraft Premium a trusted choice for architects, interior
+                    designers, builders, and homeowners alike
+                </p>
+
+                <!-- Stats row -->
+                <div class="about-stats reveal">
+                    <div class="about-stat">
+                        <span class="stat-num" data-target="50000">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Happy Families</span>
+                    </div>
+                    <div class="about-stat-divider"></div>
+                    <div class="about-stat">
+                        <span class="stat-num" data-target="500">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Cities Served</span>
+                    </div>
+                    <div class="about-stat-divider"></div>
+                    <div class="about-stat">
+                        <span class="stat-num" data-target="100">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Quality Tests</span>
+                    </div>
+                </div>
+
+                <!-- Feature pills -->
+                <div class="about-pills reveal">
+                    <span class="about-pill">🏅 BIS Certified</span>
+                    <span class="about-pill">🌱 Eco Compliant</span>
+                    <span class="about-pill">🔥 Fire Retardant</span>
+                    <span class="about-pill">💧 Waterproof</span>
+                </div>
+
+                <a href="#contact" class="about-cta reveal">Get in Touch →</a>
+            </div>
+
+        </div>
+    </section>
     <!-- ========== PLYWOODS SECTION ========== -->
     <section class="product-section" id="plywoods">
         <div class="section-container">
@@ -129,7 +226,7 @@
             <div class="product-grid">
 
                 <div class="product-card reveal">
-                    <div class="card-badge">Best Seller</div>
+                    {{-- <div class="card-badge">Best Seller</div> --}}
                     <div class="card-img-wrap">
                         <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=280&fit=crop"
                             alt="Marine Plywood" class="card-img" />
@@ -150,7 +247,7 @@
                 </div>
 
                 <div class="product-card reveal">
-                    <div class="card-badge new">New Arrival</div>
+                    {{-- <div class="card-badge new">New Arrival</div> --}}
                     <div class="card-img-wrap">
                         <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=280&fit=crop"
                             alt="Fire Retardant Ply" class="card-img" />
@@ -192,7 +289,7 @@
                 </div>
 
                 <div class="product-card reveal">
-                    <div class="card-badge hot">Hot Deal</div>
+                    {{-- <div class="card-badge hot">Hot Deal</div> --}}
                     <div class="card-img-wrap">
                         <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=280&fit=crop"
                             alt="Calibrated Plywood" class="card-img" />
@@ -231,7 +328,7 @@
             <div class="product-grid">
 
                 <div class="product-card reveal">
-                    <div class="card-badge">Premium</div>
+                    {{-- <div class="card-badge">Premium</div> --}}
                     <div class="card-img-wrap">
                         <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&h=280&fit=crop"
                             alt="Teak Blockboard" class="card-img" />
@@ -272,7 +369,7 @@
                 </div>
 
                 <div class="product-card reveal">
-                    <div class="card-badge new">New</div>
+                    {{-- <div class="card-badge new">New</div> --}}
                     <div class="card-img-wrap">
                         <img src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=400&h=280&fit=crop"
                             alt="MDF Blockboard" class="card-img" />
@@ -293,7 +390,7 @@
                 </div>
 
                 <div class="product-card reveal">
-                    <div class="card-badge hot">Hot Deal</div>
+                    {{-- <div class="card-badge hot">Hot Deal</div> --}}
                     <div class="card-img-wrap">
                         <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=400&h=280&fit=crop"
                             alt="Eucalyptus Blockboard" class="card-img" />
@@ -332,7 +429,7 @@
             <div class="product-grid">
 
                 <div class="product-card reveal">
-                    <div class="card-badge">Top Pick</div>
+                    {{-- <div class="card-badge">Top Pick</div> --}}
                     <div class="card-img-wrap">
                         <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=280&fit=crop"
                             alt="Flush Door" class="card-img" />
@@ -353,7 +450,7 @@
                 </div>
 
                 <div class="product-card reveal">
-                    <div class="card-badge new">Trending</div>
+                    {{-- <div class="card-badge new">Trending</div> --}}
                     <div class="card-img-wrap">
                         <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=400&h=280&fit=crop"
                             alt="Designer Panel Door" class="card-img" />
@@ -395,7 +492,7 @@
                 </div>
 
                 <div class="product-card reveal">
-                    <div class="card-badge hot">Best Value</div>
+                    {{-- <div class="card-badge hot">Best Value</div> --}}
                     <div class="card-img-wrap">
                         <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=400&h=280&fit=crop"
                             alt="Membrane Door" class="card-img" />
@@ -455,43 +552,8 @@
     </section>
 
     <!-- ========== TESTIMONIALS ========== -->
-    <section class="testimonials" id="about">
-        <div class="section-container">
-            <div class="section-header reveal">
-                <h2 class="section-title">What Our Customers Say</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="testi-grid">
-                <div class="testi-card reveal">
-                    <div class="testi-stars">★★★★★</div>
-                    <p>"Excellent quality plywood. Used for my entire home interior. Very happy with the finish and
-                        durability."</p>
-                    <div class="testi-author">
-                        <div class="testi-avatar">R</div>
-                        <div><strong>Rajesh Patel</strong><span>Ahmedabad, Gujarat</span></div>
-                    </div>
-                </div>
-                <div class="testi-card reveal">
-                    <div class="testi-stars">★★★★★</div>
-                    <p>"The blockboard quality is outstanding. My carpenter was very impressed. Highly recommended for
-                        furniture work."</p>
-                    <div class="testi-author">
-                        <div class="testi-avatar">S</div>
-                        <div><strong>Sunita Sharma</strong><span>Mumbai, Maharashtra</span></div>
-                    </div>
-                </div>
-                <div class="testi-card reveal">
-                    <div class="testi-stars">★★★★☆</div>
-                    <p>"Got the fire retardant ply for my modular kitchen. Great product, fast delivery and good
-                        pricing."</p>
-                    <div class="testi-author">
-                        <div class="testi-avatar">A</div>
-                        <div><strong>Amit Verma</strong><span>Delhi</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- ========== ABOUT US ========== -->
+
 
     <!-- ========== FOOTER ========== -->
     <footer class="footer" id="contact">
@@ -522,15 +584,20 @@
                 <ul>
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Certificates</a></li>
-                    <li><a href="#">Dealers Near You</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
                 <h4>Contact Us</h4>
-                <p>📞 Toll Free: 1800-000-1234</p>
-                <p>📧 info@woodcraftpremium.in</p>
-                <p>📍 Ahmedabad, Gujarat</p>
+                @if ($settings->phone)
+                    <p>📞 {{ $settings->phone }}</p>
+                @endif
+                @if ($settings->email)
+                    <p>📧 {{ $settings->email }}</p>
+                @endif
+                @if ($settings->address)
+                    <p>📍 {{ $settings->address }}</p>
+                @endif
             </div>
         </div>
         <div class="footer-bottom">

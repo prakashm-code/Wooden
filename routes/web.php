@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Route;
 
 // });
 
-Route::get('/', [HomeController::class, 'index']);
-    Route::get('/listing', [HomeController::class, 'listing'])->name('listing');
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/listing', [HomeController::class, 'listing'])->name('listing');
+Route::get('/admin', function () {
+    return redirect()->route('login');
+});
 // Route::get('/userRegister', [OrderController::class, 'userRegister'])->name('profile.edit');// Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -22,4 +24,4 @@ Route::get('/', [HomeController::class, 'index']);
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
