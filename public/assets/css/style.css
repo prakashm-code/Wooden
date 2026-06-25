@@ -7,14 +7,14 @@
     box-sizing: border-box;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap");
 :root {
-    --red: #c8102e;
-    --red-dark: #a00d24;
-    --red-light: #f8e8eb;
-    --orange: #e87c2e;
-    --wood: #8b5e3c;
-    --wood-light: #f5ede3;
+    --red: #1a9cb0; /* Primary teal from Fraction Plus logo */
+    --red-dark: #147a8a; /* Darker teal for hover states */
+    --red-light: #e0f5f8; /* Light teal for backgrounds/badges */
+    --orange: #2bb5cc; /* Lighter teal accent (replaces orange) */
+    --wood: #1c6b78;
+    --wood-light: #f0f9fb;
     --dark: #1a1a1a;
     --dark2: #2d2d2d;
     --gray: #6b7280;
@@ -30,7 +30,7 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    font-family: "Inter", sans-serif;
+    font-family: "DM Sans", sans-serif;
     color: var(--dark);
     background: #fff;
     overflow-x: hidden;
@@ -55,7 +55,7 @@ body {
 }
 
 .loader-logo {
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Poppins", sans-serif;
     font-size: 2.2rem;
     font-weight: 600;
     color: #fff;
@@ -64,7 +64,7 @@ body {
     animation: addonFadeIn 0.6s ease 0.3s forwards;
 }
 .loader-logo span {
-    color: #c8102e;
+    color: var(--red);
 }
 
 .loader-bar-wrap {
@@ -79,7 +79,7 @@ body {
 .loader-bar {
     height: 100%;
     width: 0;
-    background: #c8102e;
+    background: var(--red);
     border-radius: 2px;
     animation: loaderProgress 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
 }
@@ -110,9 +110,9 @@ body {
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.12);
 }
 .nav-container {
-    max-width: 1300px;
+    max-width: 100%; /* was 1300px */
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 3rem; /* was 0 2rem — keeps a little breathing room */
     height: 72px;
     display: flex;
     align-items: center;
@@ -129,7 +129,7 @@ body {
 }
 .logo-main {
     display: block;
-    font-family: "Playfair Display", serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--dark);
@@ -198,23 +198,17 @@ body {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background: linear-gradient(
-        135deg,
-        #1a0a00 0%,
-        #3d1a00 40%,
-        #5c2d0a 70%,
-        #8b5e3c 100%
-    );
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
 }
 .hero-bg::before {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url("https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80");
+    background-image: url("https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=1600&q=90");
     background-size: cover;
     background-position: center;
-    opacity: 0.3;
-    mix-blend-mode: multiply;
+    opacity: 0.45;
+    mix-blend-mode: normal;
 }
 .hero-overlay {
     position: absolute;
@@ -222,9 +216,9 @@ body {
     z-index: 1;
     background: linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.75) 0%,
-        rgba(0, 0, 0, 0.2) 60%,
-        rgba(0, 0, 0, 0.4) 100%
+        rgba(0, 0, 0, 0.82) 0%,
+        rgba(0, 0, 0, 0.35) 55%,
+        rgba(0, 0, 0, 0.55) 100%
     );
 }
 .hero-content {
@@ -252,7 +246,7 @@ body {
     animation: fadeSlideUp 0.8s ease 0.2s both;
 }
 .hero-title {
-    font-family: "Playfair Display", serif;
+    font-family: "Poppins", sans-serif;
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     font-weight: 800;
     line-height: 1.1;
@@ -321,7 +315,7 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 .form-card h3 {
-    font-family: "Playfair Display", serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1.4rem;
     color: var(--dark);
     margin-bottom: 0.25rem;
@@ -452,7 +446,7 @@ body {
     margin-bottom: 0.5rem;
 }
 .section-title {
-    font-family: "Playfair Display", serif;
+    font-family: "Poppins", sans-serif;
     font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 700;
     color: var(--dark);
@@ -671,7 +665,7 @@ body {
 
 /* ========== WHY CHOOSE US ========== */
 .why-us {
-    background: linear-gradient(135deg, var(--dark) 0%, #2d1a08 100%);
+    background: linear-gradient(135deg, #0d1b1e 0%, #0a2a30 50%, #0d1b1e 100%);
     padding: 6rem 0;
 }
 .why-grid {
@@ -683,12 +677,14 @@ body {
 .why-card {
     text-align: center;
     padding: 2rem 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(26, 156, 176, 0.25); /* teal tinted border */
     border-radius: var(--radius);
     transition: var(--transition);
 }
+
 .why-card:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(26, 156, 176, 0.08); /* teal tint on hover */
+    border-color: rgba(26, 156, 176, 0.5);
     transform: translateY(-4px);
 }
 .why-icon {
@@ -765,6 +761,201 @@ body {
 .testi-author span {
     font-size: 0.75rem;
     color: var(--gray);
+}
+
+.listing-hero {
+    padding: 120px 0 60px;
+    background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 60%, #8b5e3c 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.listing-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400")
+        center/cover;
+    opacity: 0.15;
+}
+
+.listing-hero-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.listing-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.listing-breadcrumb a,
+.listing-breadcrumb span {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.listing-breadcrumb a:hover {
+    color: #fff;
+}
+
+.listing-breadcrumb .sep {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.listing-breadcrumb .current {
+    color: #fff;
+    font-weight: 600;
+}
+
+.listing-hero h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.75rem;
+}
+
+.listing-hero h1 span {
+    color: var(--red);
+}
+
+.listing-hero p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+}
+
+.listing-count {
+    display: inline-block;
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.filter-bar {
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 72px;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.filter-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    overflow-x: auto;
+}
+
+.filter-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gray);
+    white-space: nowrap;
+}
+
+.filter-pills {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-pill {
+    padding: 0.35rem 1rem;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.25s;
+    white-space: nowrap;
+    background: #fff;
+}
+
+.filter-pill:hover,
+.filter-pill.active {
+    border-color: var(--red);
+    color: var(--red);
+    background: var(--red-light);
+}
+
+.filter-sort {
+    margin-left: auto;
+    padding: 0.35rem 0.8rem;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--dark);
+    cursor: pointer;
+    outline: none;
+    font-family: "Inter", sans-serif;
+    background: #fff;
+}
+
+.listing-body {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+}
+
+.listing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.product-card {
+    display: none;
+}
+
+.product-card.visible {
+    display: block;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    grid-column: 1 / -1;
+}
+
+.empty-state p {
+    color: var(--gray);
+    font-size: 1rem;
+}
+
+@media (max-width: 1100px) {
+    .listing-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .listing-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .listing-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ========== FOOTER ========== */
@@ -920,7 +1111,7 @@ body {
     margin-bottom: 0.75rem;
 }
 .modal-header h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1.7rem;
     color: var(--dark);
     margin-bottom: 0.5rem;
@@ -1086,7 +1277,7 @@ body {
 }
 .badge-number {
     display: block;
-    font-family: "Playfair Display", serif;
+    font-family: "Poppins", sans-serif;
     font-size: 2.2rem;
     font-weight: 800;
     line-height: 1;
@@ -1148,7 +1339,7 @@ body {
 }
 
 .about-title {
-    font-family: "Playfair Display", serif;
+    font-family: "Poppins", sans-serif;
     font-size: clamp(2rem, 3.5vw, 3rem);
     font-weight: 800;
     color: var(--dark);
@@ -1244,7 +1435,7 @@ body {
     text-align: center;
 }
 .stat-num {
-    font-family: "Playfair Display", serif;
+    font-family: "Poppins", sans-serif;
     font-size: 2rem;
     font-weight: 800;
     color: var(--red);

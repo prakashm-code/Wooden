@@ -28,9 +28,10 @@ class HomeController extends Controller
 
         $settings = StoreSetting::first();
 
-        return view('index', compact(
+        return view('layouts.front_layout', compact(
             'title',
             'js',
+            'page',
             'settings',
             'plywoods',
             'doors',
@@ -40,35 +41,43 @@ class HomeController extends Controller
     public function listing(Request $request)
     {
         $title = 'Listing';
-        $page = 'index';
+        $page = 'listing';
         $js = ['validate'];
         $category = $request->cat;
+        $settings = StoreSetting::first();
+
         // dd($category);
         if ($category == 'plywoods') {
             $plywoods = Plywood::all();
-            return view('listing', compact(
+            return view('layouts.front_layout', compact(
                 'title',
                 'js',
+                'page',
                 'category',
-                'plywoods'
+                'plywoods',
+                'settings'
             ));
         }
         if ($category == 'doors') {
             $doors = Door::all();
-            return view('listing', compact(
+            return view('layouts.front_layout', compact(
                 'title',
                 'js',
+                'page',
                 'category',
+                'settings',
                 'doors'
             ));
         }
         if ($category == 'blockboards') {
             $blockboards = BlockBoard::all();
-            return view('listing', compact(
+            return view('layouts.front_layout', compact(
                 'title',
                 'js',
+                'page',
                 'category',
-                'blockboards'
+                'blockboards',
+                'settings'
             ));
         }
     }

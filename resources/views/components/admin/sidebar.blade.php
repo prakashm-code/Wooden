@@ -2,7 +2,7 @@
     <div class="app-brand demo">
         <a href="{{ auth()->user()->role === 'super_admin' ? route('dashboard') : route('outlet_dashboard') }}"
             class="app-brand-link">
-            <img src="{{ asset('admin/assets/img/logos/logo.png') }}" alt="" height="180" width="200" />
+            <img src="{{ asset('assets/logos/logo.png') }}" alt="" height="120" width="150" />
         </a>
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
             <i class="bx bx-chevron-left d-block d-xl-none align-middle"></i>

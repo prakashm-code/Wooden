@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/listing', [HomeController::class, 'listing'])->name('listing');
 Route::post('/storeEnquiry', [EnquiryController::class, 'storeEnquiry'])->name('enquiry.store');
-Route::get('/admin', function () {
-    return redirect()->route('login');
-});
+// Route::get('/test', function () {
+//     return redirect('admin/login');
+// });
 // Route::get('/userRegister', [OrderController::class, 'userRegister'])->name('profile.edit');// Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

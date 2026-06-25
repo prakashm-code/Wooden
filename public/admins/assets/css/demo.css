@@ -4,8 +4,8 @@
 ******************************************************************************/
 
 .menu .app-brand.demo {
-    height: 64px;
-    margin-top: 12px;
+    height: 82px;
+    margin-top: 10px;
 }
 
 .app-brand-logo.demo svg {
@@ -20,7 +20,9 @@
 
 /* ! For .layout-navbar-fixed added fix padding top to .layout-page */
 /* Detached navbar */
-.layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
+.layout-navbar-fixed
+    .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu)
+    .layout-page {
     padding-top: 74px !important;
 }
 
@@ -29,8 +31,12 @@
     padding-top: 64px !important;
 }
 
-.docs-page .layout-navbar-fixed.layout-wrapper:not(.layout-without-menu) .layout-page,
-.docs-page .layout-menu-fixed.layout-wrapper:not(.layout-without-menu) .layout-page {
+.docs-page
+    .layout-navbar-fixed.layout-wrapper:not(.layout-without-menu)
+    .layout-page,
+.docs-page
+    .layout-menu-fixed.layout-wrapper:not(.layout-without-menu)
+    .layout-page {
     padding-top: 62px !important;
 }
 
@@ -43,39 +49,39 @@
 * Content
 ******************************************************************************/
 
-.demo-blocks>* {
+.demo-blocks > * {
     display: block !important;
 }
 
-.demo-inline-spacing>* {
+.demo-inline-spacing > * {
     margin: 1rem 0.375rem 0 0 !important;
 }
 
 /* ? .demo-vertical-spacing class is used to have vertical margins between elements. To remove margin-top from the first-child, use .demo-only-element class with .demo-vertical-spacing class. For example, we have used this class in forms-input-groups.html file. */
-.demo-vertical-spacing>* {
+.demo-vertical-spacing > * {
     margin-top: 1rem !important;
     margin-bottom: 0 !important;
 }
 
-.demo-vertical-spacing.demo-only-element> :first-child {
+.demo-vertical-spacing.demo-only-element > :first-child {
     margin-top: 0 !important;
 }
 
-.demo-vertical-spacing-lg>* {
+.demo-vertical-spacing-lg > * {
     margin-top: 1.875rem !important;
     margin-bottom: 0 !important;
 }
 
-.demo-vertical-spacing-lg.demo-only-element> :first-child {
+.demo-vertical-spacing-lg.demo-only-element > :first-child {
     margin-top: 0 !important;
 }
 
-.demo-vertical-spacing-xl>* {
+.demo-vertical-spacing-xl > * {
     margin-top: 5rem !important;
     margin-bottom: 0 !important;
 }
 
-.demo-vertical-spacing-xl.demo-only-element> :first-child {
+.demo-vertical-spacing-xl.demo-only-element > :first-child {
     margin-top: 0 !important;
 }
 
@@ -260,36 +266,36 @@ table.dataTable.no-footer {
 }
 /* ===== Sneat DataTable select full styling ===== */
 .dataTables_wrapper .dataTables_length select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 
-  border: 1px solid #d9dee3;
-  border-radius: 0.375rem;
-  background-color: #fff;
+    border: 1px solid #d9dee3;
+    border-radius: 0.375rem;
+    background-color: #fff;
 
-  padding: 0.25rem 2rem 0.25rem 0.5rem;
-  color: #566a7f;
+    padding: 0.25rem 2rem 0.25rem 0.5rem;
+    color: #566a7f;
 
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23696cff' viewBox='0 0 16 16'%3E%3Cpath d='M3.204 5h9.592L8 11 3.204 5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.5rem center;
-  background-size: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23696cff' viewBox='0 0 16 16'%3E%3Cpath d='M3.204 5h9.592L8 11 3.204 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 12px;
 }
 /* Sneat pagination hover for Prev / Next */
 .dataTables_wrapper .paginate_button.previous:hover,
 .dataTables_wrapper .paginate_button.next:hover {
-  background: rgba(105,108,255,0.12) !important;
-  color: #696cff !important;
-  border-radius: 0.375rem;
-  cursor: pointer;
+    background: rgba(105, 108, 255, 0.12) !important;
+    color: #696cff !important;
+    border-radius: 0.375rem;
+    cursor: pointer;
 }
 
 /* Also for all non-active pages */
 .dataTables_wrapper .paginate_button:not(.current):hover {
-  background: rgba(105,108,255,0.12) !important;
-  color: #696cff !important;
-  cursor: pointer;
+    background: rgba(105, 108, 255, 0.12) !important;
+    color: #696cff !important;
+    cursor: pointer;
 }
 /* .qty-box .form-control {
   max-width: 45px;
@@ -301,61 +307,60 @@ table.dataTable.no-footer {
 } */
 /* Qty control container */
 .qty-control {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  background: #fff;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #fff;
 }
 
 /* Buttons */
 .qty-btn {
-  width: 34px;
-  height: 34px;
-  border: none;
-  background: #f8f7fa;
-  color: #696cff;
-  font-size: 18px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .15s ease;
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: #f8f7fa;
+    color: #696cff;
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
 }
 
 /* Hover */
 .qty-btn:hover {
-  background: rgba(105,108,255,.12);
+    background: rgba(105, 108, 255, 0.12);
 }
 
 /* Active press */
 .qty-btn:active {
-  transform: scale(.95);
-  background: rgba(105,108,255,.18);
+    transform: scale(0.95);
+    background: rgba(105, 108, 255, 0.18);
 }
 
 /* Input */
 .qty-input {
-  width: 42px;
-  height: 34px;
-  border: none;
-  text-align: center;
-  font-weight: 500;
-  color: #566a7f;
-  background: #fff;
+    width: 42px;
+    height: 34px;
+    border: none;
+    text-align: center;
+    font-weight: 500;
+    color: #566a7f;
+    background: #fff;
 }
 
 /* Remove arrows */
 .qty-input::-webkit-outer-spin-button,
 .qty-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
-.qty-input[type=number] {
-  -moz-appearance: textfield;
+.qty-input[type="number"] {
+    -moz-appearance: textfield;
 }
-
 
 /* ── DATATABLE SCROLL FIX ── */
 
