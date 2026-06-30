@@ -685,28 +685,28 @@
         <div class="sa-stat-card c1">
             <div class="sa-stat-icon"><i class="bx bx-layer"></i></div>
             <div class="sa-stat-label">Plywoods</div>
-            <div class="sa-stat-value">{{ 1 }}</div>
+            <div class="sa-stat-value">{{ $total_plywoods }}</div>
             <div class="sa-stat-delta">Total products</div>
         </div>
 
         <div class="sa-stat-card c2">
             <div class="sa-stat-icon"><i class="bx bx-door-open"></i></div>
             <div class="sa-stat-label">Doors</div>
-            <div class="sa-stat-value">{{ 2 }}</div>
+            <div class="sa-stat-value">{{ $total_doors }}</div>
             <div class="sa-stat-delta">Total products</div>
         </div>
 
         <div class="sa-stat-card c4">
             <div class="sa-stat-icon"><i class="bx bx-grid-alt"></i></div>
             <div class="sa-stat-label">Blockboards</div>
-            <div class="sa-stat-value">{{ 3 }}</div>
+            <div class="sa-stat-value">{{ $total_blockboards }}</div>
             <div class="sa-stat-delta">Total products</div>
         </div>
 
         <div class="sa-stat-card c3">
             <div class="sa-stat-icon"><i class="bx bx-message-detail"></i></div>
             <div class="sa-stat-label">Enquiries</div>
-            <div class="sa-stat-value">{{ 4 }}</div>
+            <div class="sa-stat-value">{{ $total_enquiry }}</div>
             <div class="sa-stat-delta">Total received</div>
         </div>
 

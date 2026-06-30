@@ -39,24 +39,33 @@ class EnquiryDataTable extends DataTable
                     }
                 }
             })
-
-            ->addColumn('actions', function ($row) {
-                $cryptId = encrypt($row->id);
-                $deleteUrl = route('enquiry.destroy', $cryptId);
-
-                return '
-                    <div class="d-flex gap-2">
-                        <a href="javascript:void(0)"
-                           class="delete-link"
-                           data-url="' . $deleteUrl . '"
-                           title="Delete">
-                            <i class="bx bx-trash"></i>
-                        </a>
-                    </div>
-                ';
+            ->addColumn('checkbox', function ($row) {
+                return '<input type="checkbox" class="row-checkbox" value="' . $row->id . '">';
             })
 
-            ->rawColumns(['actions']);
+            ->addColumn('name', function ($row) {
+                return $row->name;
+            })
+            ->addColumn('phone_number', function ($row) {
+                return $row->phone_number;
+            })
+            ->addColumn('email', function ($row) {
+                return $row->email;
+            })
+            ->addColumn('message', function ($row) {
+                return $row->message;
+            })
+            ->addColumn('city', function ($row) {
+                return $row->city;
+            })
+
+            ->addColumn('created_at', function ($row) {
+                return $row->created_at->format('d-m-Y');
+            })
+
+
+
+            ->rawColumns(['checkbox', 'name', 'phone_number', 'email', 'city', 'message', 'created_at']);
     }
 
     public function query(Enquiry $model, Request $request): QueryBuilder
@@ -66,10 +75,9 @@ class EnquiryDataTable extends DataTable
             1 => 'name',
             2 => 'phone_number',
             3 => 'email',
-            4 => 'state',
-            5 => 'city',
-            6 => 'product',
-            7 => 'created_at',
+            4 => 'city',
+            5 => 'message',
+            6 => 'created_at',
         ];
 
         $orderIndex = $request->input('order.0.column', 0);
@@ -86,7 +94,7 @@ class EnquiryDataTable extends DataTable
             ->setTableId('enquiry-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(7, 'desc');
+            ->orderBy(1);
     }
 
     public function getColumns(): array
@@ -105,14 +113,9 @@ class EnquiryDataTable extends DataTable
             Column::make('email')
                 ->title('Email'),
 
-            Column::make('state')
-                ->title('State'),
 
             Column::make('city')
                 ->title('City'),
-
-            Column::make('product')
-                ->title('Product'),
 
             Column::make('message')
                 ->title('Message')
@@ -121,10 +124,7 @@ class EnquiryDataTable extends DataTable
             Column::make('created_at')
                 ->title('Date'),
 
-            Column::computed('actions')
-                ->title('Actions')
-                ->orderable(false)
-                ->searchable(false),
+
         ];
     }
 

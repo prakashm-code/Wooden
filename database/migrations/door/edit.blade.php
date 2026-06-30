@@ -3,21 +3,21 @@
                     <div class="col-xl">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">Edit BlockBoard</h5>
-                                <a href="{{ route('blockboards') }}" class="btn btn-secondary btn-sm">
+                                <h5 class="mb-0">Edit Door</h5>
+                                <a href="{{ route('doors') }}" class="btn btn-secondary btn-sm">
                                     <i class="bx bx-arrow-back me-1"></i> Back
                                 </a>
                                 {{-- <small class="text-body float-end">Default label</small> --}}
                             </div>
                             <div class="card-body">
-                                <form id="edit_blockboard_form" method="POST"
-                                    action="{{ route('blockboard.update', encrypt($data['id'])) }}"
+                                <form id="edit_door_form" method="POST"
+                                    action="{{ route('door.update', encrypt($data['id'])) }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-6">
-                                        <label class="form-label" for="name">BlockBoard Name</label>
+                                        <label class="form-label" for="name"> Name</label>
                                         <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="e.g. BlockBoard" value="{{ $data['name'] }}">
+                                            placeholder="e.g Door" value="{{ $data['name'] }}">
                                     </div>
                                     <div class="mb-6">
                                         <label class="form-label" for="price">Price </label>
@@ -49,7 +49,7 @@
                                         <div class="mb-3">
                                             @if (!empty($data['image']))
                                                 <img id="image_preview"
-                                                    src="{{ asset('admins/uploads/blockboards/' . $data['image']) }}"
+                                                    src="{{ asset('admins/uploads/doors/' . $data['image']) }}"
                                                     alt="Menu Item Image"
                                                     style="width: 160px; height: 160px; object-fit: cover;
                                                            border-radius: 10px; border: 2px solid #e0e0e0;">
@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">
-                                        Save Menu
+                                        Save 
                                     </button>
                                 </form>
                             </div>
@@ -78,8 +78,6 @@
                     </div>
                 </div>
             </div>
-
-
             <script>
                 document.getElementById('image').addEventListener('change', function(e) {
                     const file = e.target.files[0];

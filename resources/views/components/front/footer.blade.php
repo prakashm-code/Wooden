@@ -12,21 +12,21 @@
             @csrf
             <div class="modal-field">
                 <label>Your Name *</label>
-                <input type="text" name="name" id="enqName" required>
+                <input type="text" name="name" id="enqName">
             </div>
 
             <div class="modal-field">
                 <label>Phone Number *</label>
-                <input type="tel" name="phone" id="enqPhone" required>
+                <input type="number" name="phone" id="enqPhone">
             </div>
 
             <div class="modal-field">
-                <label>Email Address</label>
+                <label>Email Address *</label>
                 <input type="email" name="email" id="enqEmail">
             </div>
 
             <div class="modal-field">
-                <label>City</label>
+                <label>City *</label>
                 <input type="text" name="city" id="enqCity">
             </div>
 
@@ -46,6 +46,8 @@
         <p>Our team will contact you within 24 hours.</p>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.20.0/dist/jquery.validate.min.js"></script>
 <script src="{{ asset('assets/js/index.js') }}"></script>
 @if (isset($js))
     @foreach ($js as $value)

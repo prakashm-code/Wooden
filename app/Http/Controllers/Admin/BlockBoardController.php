@@ -56,7 +56,7 @@ class BlockBoardController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename  = time() . '.' . $extension;
 
-                $uploadPath = public_path('admin/uploads/blockboards/');
+                $uploadPath = public_path('admins/uploads/blockboards/');
 
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
@@ -122,7 +122,7 @@ class BlockBoardController extends Controller
             $menu->market_price  = $validated['market_price'];
             if ($request->hasFile('image')) {
                 if ($menu->image) {
-                    $oldImagePath = public_path('admin/uploads/blockboards/' . $menu->image);
+                    $oldImagePath = public_path('admins/uploads/blockboards/' . $menu->image);
                     if (file_exists($oldImagePath)) {
                         unlink($oldImagePath);
                     }
@@ -132,7 +132,7 @@ class BlockBoardController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename  = time() . '.' . $extension;
 
-                $uploadPath = public_path('admin/uploads/blockboards/');
+                $uploadPath = public_path('admins/uploads/blockboards/');
 
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);

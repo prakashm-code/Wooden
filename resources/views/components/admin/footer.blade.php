@@ -56,7 +56,7 @@
  @if (isset($js))
      {{-- {{ dd($js) }} --}}
      @foreach ($js as $value)
-         <script src="{{ asset('admin') }}/js/{{ $value }}.js?v=9.1"></script>
+         <script src="{{ asset('admins') }}/js/{{ $value }}.js?v=9.1"></script>
      @endforeach
  @endif
 

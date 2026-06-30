@@ -11,7 +11,8 @@
                             </div>
                             <div class="card-body">
                                 <form id="edit_plywood_form" method="POST"
-                                    action="{{ route('plywood.update', encrypt($data['id'])) }}">
+                                    action="{{ route('plywood.update', encrypt($data['id'])) }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-6">
                                         <label class="form-label" for="name">Plywood Name</label>
@@ -48,7 +49,7 @@
                                         <div class="mb-3">
                                             @if (!empty($data['image']))
                                                 <img id="image_preview"
-                                                    src="{{ asset('admin/uploads/plywoods/' . $data['image']) }}"
+                                                    src="{{ asset('admins/uploads/plywoods/' . $data['image']) }}"
                                                     alt="Menu Item Image"
                                                     style="width: 160px; height: 160px; object-fit: cover;
                                                            border-radius: 10px; border: 2px solid #e0e0e0;">

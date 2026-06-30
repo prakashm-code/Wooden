@@ -57,7 +57,7 @@ class DoorController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename  = time() . '.' . $extension;
 
-                $uploadPath = public_path('admin/uploads/doors/');
+                $uploadPath = public_path('admins/uploads/doors/');
 
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
@@ -124,7 +124,7 @@ class DoorController extends Controller
             $menu->market_price  = $validated['market_price'];
             if ($request->hasFile('image')) {
                 if ($menu->image) {
-                    $oldImagePath = public_path('admin/uploads/doors/' . $menu->image);
+                    $oldImagePath = public_path('admins/uploads/doors/' . $menu->image);
                     if (file_exists($oldImagePath)) {
                         unlink($oldImagePath);
                     }
@@ -134,7 +134,7 @@ class DoorController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename  = time() . '.' . $extension;
 
-                $uploadPath = public_path('admin/uploads/doors/');
+                $uploadPath = public_path('admins/uploads/doors/');
 
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);

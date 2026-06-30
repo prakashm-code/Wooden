@@ -49,13 +49,13 @@
         </div>
         <div class="footer-contact">
             <h4>Contact Us</h4>
-            @if ($settings->phone)
+            @if (!empty($settings) && $settings->phone)
                 <p>📞 {{ $settings->phone }}</p>
             @endif
-            @if ($settings->email)
+            @if (!empty($settings) && $settings->email)
                 <p>📧 {{ $settings->email }}</p>
             @endif
-            @if ($settings->address)
+            @if (!empty($settings) && $settings->address)
                 <p>📍 {{ $settings->address }}</p>
             @endif
         </div>

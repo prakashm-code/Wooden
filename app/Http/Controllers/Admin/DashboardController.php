@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\EnquiryDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\BlockBoard;
 use App\Models\Customer;
+use App\Models\Door;
+use App\Models\Enquiry;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Outlet;
 use App\Models\Payment;
+use App\Models\Plywood;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,58 +24,19 @@ class DashboardController extends Controller
         $title = 'Dashboard';
         $page = 'admin.dashboard';
 
-        // $user = auth()->user();
-        $today = Carbon::today();
+        $total_plywoods = Plywood::count();
+        $total_doors = Door::count();
+        $total_blockboards = BlockBoard::count();
 
-        // Base query
-        // $orderQuery = Order::query();
-        // $paymentQuery = Payment::query();
-
-        // // If admin → only their outlet
-        // if ($user->role == 'admin') {
-
-        //     $orderQuery->where('outlet_id', $user->outlet_id);
-
-        //     $paymentQuery->whereHas('order', function ($q) use ($user) {
-        //         $q->where('outlet_id', $user->outlet_id);
-        //     });
-        // }
-
-        // Today's Orders
-        $todayOrders = 1;
-
-        // Today's Sales
-        $todaySales = 1;
-
-        // Today's Payments
-        $todayPayments = 1;
-
-        // Customers
-        $totalCustomers = 1;
-
-        // Staff
-        $totalStaff = User::whereIn('role', ['admin', 'cashier', 'waiter'])->count();
-        $totalRevenue = 11111;
-        // Recent Orders
-
-
-        // dd($recentOrders);
-        $totalOutlets = 1;
-        $totalOrders = 1;
-        $outlets = 1;
-        $activeStaff = User::where('role', '!=', 'super_admin')->count();
+        $total_enquiry = Enquiry::count();
         return view("layouts.layout", compact(
             'title',
             'page',
-            'totalRevenue',
-            'todayOrders',
-            'totalOrders',
-            'totalOutlets',
-            'todaySales',
-            'todayPayments',
-            'totalCustomers',
-            'totalStaff',
-            'outlets',
+            'total_plywoods',
+            'total_doors',
+            'total_blockboards',
+            'total_enquiry',
+
         ));
     }
 

@@ -21,7 +21,7 @@ class HomeController extends Controller
     {
         $title = 'Home';
         $page = 'index';
-        $js = ['validate'];
+        $js = [''];
         $plywoods = Plywood::orderBy('id', 'desc')->take(4)->get();
         $doors = Door::orderBy('id', 'desc')->take(4)->get();
         $blockboards = BlockBoard::orderBy('id', 'desc')->take(4)->get();
@@ -42,7 +42,7 @@ class HomeController extends Controller
     {
         $title = 'Listing';
         $page = 'listing';
-        $js = ['validate'];
+        $js = ['index'];
         $category = $request->cat;
         $settings = StoreSetting::first();
 

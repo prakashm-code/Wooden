@@ -61,8 +61,8 @@ class DoorDataTable extends DataTable
             ->addColumn('actions', function ($row) {
                 $cryptId = encrypt($row->id);
                 $template_delete = decrypt($cryptId);
-                $delete_url = route('Door.destroy', $cryptId);
-                $edit_url = route('Door.edit', $cryptId);
+                $delete_url = route('door.destroy', $cryptId);
+                $edit_url = route('door.edit', $cryptId);
 
                 return '<div class="action-icon" style="gap: 10px;display: flex">
                                                           <a class="dropdown-item"  href="' .  $edit_url . '"><i class="icon-base bx bx-edit-alt me-2"></i></a>

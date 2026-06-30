@@ -11,7 +11,8 @@
                             </div>
                             <div class="card-body">
                                 <form id="edit_door_form" method="POST"
-                                    action="{{ route('door.update', encrypt($data['id'])) }}">
+                                    action="{{ route('door.update', encrypt($data['id'])) }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-6">
                                         <label class="form-label" for="name"> Name</label>
@@ -22,6 +23,12 @@
                                         <label class="form-label" for="price">Price </label>
                                         <input type="number" step="0.01" class="form-control" id="price"
                                             name="price" placeholder="e.g. 250" value="{{ $data['price'] }}">
+                                    </div>
+                                    <div class="mb-6">
+                                        <label class="form-label" for="price">Market Price </label>
+                                        <input type="number" step="0.01" class="form-control" id="market_price"
+                                            name="market_price" placeholder="e.g. 250"
+                                            value="{{ $data['market_price'] }}">
                                     </div>
 
                                     {{-- <div class="mb-6">
@@ -42,7 +49,7 @@
                                         <div class="mb-3">
                                             @if (!empty($data['image']))
                                                 <img id="image_preview"
-                                                    src="{{ asset('admin/uploads/doors/' . $data['image']) }}"
+                                                    src="{{ asset('admins/uploads/doors/' . $data['image']) }}"
                                                     alt="Menu Item Image"
                                                     style="width: 160px; height: 160px; object-fit: cover;
                                                            border-radius: 10px; border: 2px solid #e0e0e0;">

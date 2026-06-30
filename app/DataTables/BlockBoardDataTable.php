@@ -61,8 +61,8 @@ class BlockBoardDataTable extends DataTable
             ->addColumn('actions', function ($row) {
                 $cryptId = encrypt($row->id);
                 $template_delete = decrypt($cryptId);
-                $delete_url = route('BlockBoard.destroy', $cryptId);
-                $edit_url = route('BlockBoard.edit', $cryptId);
+                $delete_url = route('blockboard.destroy', $cryptId);
+                $edit_url = route('blockboard.edit', $cryptId);
 
                 return '<div class="action-icon" style="gap: 10px;display: flex">
                                                           <a class="dropdown-item"  href="' .  $edit_url . '"><i class="icon-base bx bx-edit-alt me-2"></i></a>

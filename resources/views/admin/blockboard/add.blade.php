@@ -10,12 +10,13 @@
                                     {{-- <small class="text-body float-end">Default label</small> --}}
                                 </div>
                                 <div class="card-body">
-                                    <form id="add_blockboard_form" method="POST" action="{{ route('plywood.store') }}">
+                                    <form id="add_blockboard_form" method="POST"
+                                        action="{{ route('blockboard.store') }}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="mb-6">
                                             <label class="form-label" for="name">BlockBoard Name</label>
                                             <input type="text" class="form-control" id="name" name="name"
-                                                placeholder="e.g. Wooden Plywood">
+                                                placeholder="e.g. BlockBoard">
                                         </div>
 
                                         <div class="mb-6">

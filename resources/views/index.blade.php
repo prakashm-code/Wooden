@@ -40,25 +40,21 @@
             </div>
             <a href="#plywoods" class="hero-btn">Explore Products</a>
         </div>
-        <div class="hero-form">
+        {{-- <div class="hero-form">
             <div class="form-card">
                 <h3>Get a Free Quote</h3>
                 <p>Our experts will reach out to you</p>
-                <input type="text" placeholder="Your Name" class="form-input" />
-                <input type="tel" placeholder="Phone Number" class="form-input" />
-                <input type="email" placeholder="Email Address" class="form-input" />
-                <select class="form-input">
-                    <option value="">Select State</option>
-                    <option>Gujarat</option>
-                    <option>Maharashtra</option>
-                    <option>Rajasthan</option>
-                    <option>Delhi</option>
-                    <option>Karnataka</option>
-                </select>
-                <textarea placeholder="Message (optional)" class="form-input form-textarea"></textarea>
-                <button class="form-submit">Get Quote Now →</button>
+                <form id="enquiryForm" action="{{ route('enquiry.store') }}" method="POST">
+
+                    <input type="text" placeholder="Your Name" name="name" class="form-input" />
+                    <input type="number" placeholder="Phone Number" name="phone" class="form-input" />
+                    <input type="email" placeholder="Email Address" name="email" class="form-input" />
+                    <input type="text" placeholder="City" name="city" class="form-input" />
+                    <textarea placeholder="Message (optional)" name="message" class="form-input form-textarea"></textarea>
+
+                    <button class="form-submit">Get Quote Now →</button>
             </div>
-        </div>
+        </div> --}}
     </div>
     <div class="hero-scroll">
         <div class="scroll-dot"></div>
@@ -123,8 +119,8 @@
                 </div>
             </div>
             <div class="about-img-secondary-wrap">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=85"
-                    alt="WoodCraft Workshop" class="about-img-secondary" />
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=85" alt="WoodCraft Workshop"
+                    class="about-img-secondary" />
             </div>
             <!-- Decorative dots -->
             <div class="about-dots">
@@ -211,91 +207,30 @@
             <div class="section-line"></div>
         </div>
         <div class="product-grid">
-
-            <div class="product-card reveal">
-                {{-- <div class="card-badge">Best Seller</div> --}}
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=400&h=280&fit=crop"
-                        class="card-img" />
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('Marine Plywood BWP 710')">Quick
-                            Enquiry</button>
+            @if (count($plywoods) > 0)
+                @foreach ($plywoods as $plywood)
+                    <div class="product-card reveal visible">
+                        {{-- <div class="card-badge">Best Seller</div> --}}
+                        <div class="card-img-wrap">
+                            <img src="{{ asset('admins/uploads/plywoods/' . $plywood->image) }}" class="card-img" />
+                            <div class="card-overlay">
+                                <button class="quick-enq" onclick="openModal('{{ $plywood->name }}')">
+                                    Quick Enquiry
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-name">{{ $plywood->name }}</h3>
+                            {{-- <p class="card-desc">100% waterproof · 19mm · Gurjan Face</p> --}}
+                            <div class="card-pricing">
+                                <span class="market-price">₹{{ $plywood->market_price }}/sheet</span>
+                                <span class="our-price">₹{{ $plywood->price }}/sheet</span>
+                            </div>
+                            <button class="enq-btn" onclick="openModal('{{ $plywood->name }}')">Enquiry Now</button>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">Marine Plywood BWP 710</h3>
-                    <p class="card-desc">100% waterproof · 19mm · Gurjan Face</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹4,800/sheet</span>
-                        <span class="our-price">₹3,999/sheet</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('Marine Plywood BWP 710')">Enquiry Now</button>
-                </div>
-            </div>
-
-            <div class="product-card reveal">
-                {{-- <div class="card-badge new">New Arrival</div> --}}
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=280&fit=crop"
-                        class="card-img" />
-
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('Fire Retardant Plywood')">Quick
-                            Enquiry</button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">Fire Retardant Plywood</h3>
-                    <p class="card-desc">FR Grade · 12mm · ISI Marked</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹5,200/sheet</span>
-                        <span class="our-price">₹4,299/sheet</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('Fire Retardant Plywood')">Enquiry Now</button>
-                </div>
-            </div>
-
-            <div class="product-card reveal">
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=400&h=280&fit=crop"
-                        alt="Commercial Plywood" class="card-img" />
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('Commercial Plywood MR Grade')">Quick
-                            Enquiry</button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">Commercial Plywood MR Grade</h3>
-                    <p class="card-desc">Moisture Resistant · 18mm · Eucalyptus Core</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹3,100/sheet</span>
-                        <span class="our-price">₹2,499/sheet</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('Commercial Plywood MR Grade')">Enquiry
-                        Now</button>
-                </div>
-            </div>
-
-            <div class="product-card reveal">
-                {{-- <div class="card-badge hot">Hot Deal</div> --}}
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=280&fit=crop"
-                        alt="Calibrated Plywood" class="card-img" />
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('Calibrated Plywood Premium')">Quick
-                            Enquiry</button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">Calibrated Plywood Premium</h3>
-                    <p class="card-desc">±0.5mm Tolerance · 25mm · Sanded Both Sides</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹6,500/sheet</span>
-                        <span class="our-price">₹5,199/sheet</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('Calibrated Plywood Premium')">Enquiry Now</button>
-                </div>
-            </div>
+                @endforeach
+            @endif
 
         </div>
         <div class="see-all-wrap reveal">
@@ -316,88 +251,32 @@
         </div>
         <div class="product-grid">
 
-            <div class="product-card reveal">
-                {{-- <div class="card-badge">Premium</div> --}}
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&h=280&fit=crop"
-                        alt="Teak Blockboard" class="card-img" />
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('Teak Blockboard 25mm')">Quick
-                            Enquiry</button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">Teak Blockboard 25mm</h3>
-                    <p class="card-desc">Natural Teak Veneer · Screw Holding Strength</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹5,500/sheet</span>
-                        <span class="our-price">₹4,599/sheet</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('Teak Blockboard 25mm')">Enquiry Now</button>
-                </div>
-            </div>
+            @if (count($blockboards) > 0)
+                @foreach ($blockboards as $blockboard)
+                    <div class="product-card reveal visible">
+                        {{-- <div class="card-badge">Best Seller</div> --}}
+                        <div class="card-img-wrap">
+                            <img src="{{ asset('admins/uploads/blockboards/' . $blockboard->image) }}"
+                                class="card-img" />
+                            <div class="card-overlay">
+                                <button class="quick-enq" onclick="openModal('{{ $blockboard->name }}')">Quick
+                                    Enquiry</button>
+                            </div>
+                        </div>
 
-            <div class="product-card reveal">
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=400&h=280&fit=crop"
-                        alt="Pine Blockboard" class="card-img" />
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('Pine Core Blockboard')">Quick
-                            Enquiry</button>
+                        <div class="card-body">
+                            <h3 class="card-name">{{ $blockboard->name }}</h3>
+                            {{-- <p class="card-desc">100% waterproof · 19mm · Gurjan Face</p> --}}
+                            <div class="card-pricing">
+                                <span class="market-price">₹{{ $blockboard->market_price }}/sheet</span>
+                                <span class="our-price">₹{{ $blockboard->price }}/sheet</span>
+                            </div>
+                            <button class="enq-btn" onclick="openModal('{{ $blockboard->name }}')">Enquiry
+                                Now</button>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">Pine Core Blockboard</h3>
-                    <p class="card-desc">Lightweight · 19mm · Ideal for Doors & Panels</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹4,200/sheet</span>
-                        <span class="our-price">₹3,499/sheet</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('Pine Core Blockboard')">Enquiry Now</button>
-                </div>
-            </div>
-
-            <div class="product-card reveal">
-                {{-- <div class="card-badge new">New</div> --}}
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=400&h=280&fit=crop"
-                        alt="MDF Blockboard" class="card-img" />
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('MDF Core Blockboard')">Quick
-                            Enquiry</button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">MDF Core Blockboard</h3>
-                    <p class="card-desc">Smooth Finish · 25mm · Zero Formaldehyde</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹4,800/sheet</span>
-                        <span class="our-price">₹3,899/sheet</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('MDF Core Blockboard')">Enquiry Now</button>
-                </div>
-            </div>
-
-            <div class="product-card reveal">
-                {{-- <div class="card-badge hot">Hot Deal</div> --}}
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=400&h=280&fit=crop"
-                        alt="Eucalyptus Blockboard" class="card-img" />
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('Eucalyptus Blockboard BWR')">Quick
-                            Enquiry</button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">Eucalyptus Blockboard BWR</h3>
-                    <p class="card-desc">Water Resistant · 19mm · Long Life Guarantee</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹3,800/sheet</span>
-                        <span class="our-price">₹2,999/sheet</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('Eucalyptus Blockboard BWR')">Enquiry Now</button>
-                </div>
-            </div>
+                @endforeach
+            @endif
 
         </div>
         <div class="see-all-wrap reveal">
@@ -418,89 +297,30 @@
         </div>
         <div class="product-grid">
 
-            <div class="product-card reveal">
-                {{-- <div class="card-badge">Top Pick</div> --}}
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=280&fit=crop"
-                        alt="Flush Door" class="card-img" />
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('Flush Door – Solid Core')">Quick
-                            Enquiry</button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">Flush Door – Solid Core</h3>
-                    <p class="card-desc">Solid Core · 35mm · Pre-laminated Finish</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹8,500/door</span>
-                        <span class="our-price">₹6,999/door</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('Flush Door – Solid Core')">Enquiry Now</button>
-                </div>
-            </div>
+            @if (count($doors) > 0)
+                @foreach ($doors as $door)
+                    <div class="product-card reveal visible">
+                        {{-- <div class="card-badge">Best Seller</div> --}}
+                        <div class="card-img-wrap">
+                            <img src="{{ asset('admins/uploads/doors/' . $door->image) }}" class="card-img" />
+                            <div class="card-overlay">
+                                <button class="quick-enq" onclick="openModal('{{ $door->name }}')">Quick
+                                    Enquiry</button>
+                            </div>
+                        </div>
 
-            <div class="product-card reveal">
-                {{-- <div class="card-badge new">Trending</div> --}}
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=400&h=280&fit=crop"
-                        alt="Designer Panel Door" class="card-img" />
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('Designer Panel Door – Walnut')">Quick
-                            Enquiry</button>
+                        <div class="card-body">
+                            <h3 class="card-name">{{ $door->name }}</h3>
+                            {{-- <p class="card-desc">100% waterproof · 19mm · Gurjan Face</p> --}}
+                            <div class="card-pricing">
+                                <span class="market-price">₹{{ $door->market_price }}/sheet</span>
+                                <span class="our-price">₹{{ $door->price }}/sheet</span>
+                            </div>
+                            <button class="enq-btn" onclick="openModal('{{ $door->name }}')">Enquiry Now</button>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">Designer Panel Door – Walnut</h3>
-                    <p class="card-desc">Walnut Veneer · 40mm · Panel Design</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹12,000/door</span>
-                        <span class="our-price">₹9,499/door</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('Designer Panel Door – Walnut')">Enquiry
-                        Now</button>
-                </div>
-            </div>
-
-            <div class="product-card reveal">
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=400&h=280&fit=crop"
-                        alt="WPC Door" class="card-img" />
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('WPC Door – Waterproof')">Quick
-                            Enquiry</button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">WPC Door – Waterproof</h3>
-                    <p class="card-desc">100% Waterproof · 35mm · Bathroom Grade</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹7,000/door</span>
-                        <span class="our-price">₹5,499/door</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('WPC Door – Waterproof')">Enquiry Now</button>
-                </div>
-            </div>
-
-            <div class="product-card reveal">
-                {{-- <div class="card-badge hot">Best Value</div> --}}
-                <div class="card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=400&h=280&fit=crop"
-                        alt="Membrane Door" class="card-img" />
-                    <div class="card-overlay">
-                        <button class="quick-enq" onclick="openModal('Membrane Door – High Gloss')">Quick
-                            Enquiry</button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-name">Membrane Door – High Gloss</h3>
-                    <p class="card-desc">PVC Membrane · 32mm · Scratch Resistant</p>
-                    <div class="card-pricing">
-                        <span class="market-price">₹9,500/door</span>
-                        <span class="our-price">₹7,299/door</span>
-                    </div>
-                    <button class="enq-btn" onclick="openModal('Membrane Door – High Gloss')">Enquiry Now</button>
-                </div>
-            </div>
+                @endforeach
+            @endif
 
         </div>
         <div class="see-all-wrap reveal">

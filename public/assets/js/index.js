@@ -1,8 +1,8 @@
 // ========== NAVBAR SCROLL ==========
-const navbar = document.getElementById("navbar");
-window.addEventListener("scroll", () => {
-    navbar.classList.toggle("scrolled", window.scrollY > 50);
-});
+// const navbar = document.getElementById("navbar");
+// window.addEventListener("scroll", () => {
+//     navbar.classList.toggle("scrolled", window.scrollY > 50);
+// });
 
 // ========== SCROLL REVEAL ==========
 const revealEls = document.querySelectorAll(".reveal");
@@ -66,21 +66,21 @@ function closeModal() {
 }
 
 function submitEnquiry() {
-    const form = document.getElementById("enquiryForm");
+    const form = $("#enquiryForm");
 
-    if (!form.checkValidity()) {
-        form.reportValidity();
+    // Validate using jQuery Validation
+    if (!form.valid()) {
         return;
     }
 
-    const btn = document.querySelector(".modal-submit");
+    const btn = $(".modal-submit");
 
-    btn.innerHTML = "Sending...";
-    btn.disabled = true;
+    btn.html("Sending...");
+    btn.prop("disabled", true);
 
-    const formData = new FormData(form);
+    const formData = new FormData(form[0]);
 
-    fetch(form.action, {
+    fetch(form.attr("action"), {
         method: "POST",
         body: formData,
         headers: {
@@ -90,17 +90,23 @@ function submitEnquiry() {
         .then((response) => response.json())
         .then((data) => {
             if (data.success) {
-                btn.style.display = "none";
-                document.querySelector(".modal-header").style.display = "none";
-                document.querySelector(".modal-body").style.display = "none";
-                document.getElementById("modalSuccess").classList.add("show");
+                btn.hide();
+
+                $(".modal-header").hide();
+                $(".modal-body").hide();
+
+                $("#modalSuccess").addClass("show");
+
+                form[0].reset();
+
+                // Remove previous validation errors
+                form.validate().resetForm();
+                form.find(".is-invalid").removeClass("is-invalid");
 
                 setTimeout(closeModal, 3000);
-
-                form.reset();
             } else {
-                btn.innerHTML = "Send Enquiry →";
-                btn.disabled = false;
+                btn.html("Send Enquiry →");
+                btn.prop("disabled", false);
 
                 alert(data.message || "Something went wrong.");
             }
@@ -108,8 +114,8 @@ function submitEnquiry() {
         .catch((error) => {
             console.error(error);
 
-            btn.innerHTML = "Send Enquiry →";
-            btn.disabled = false;
+            btn.html("Send Enquiry →");
+            btn.prop("disabled", false);
 
             alert("Unable to submit enquiry.");
         });
@@ -193,3 +199,99 @@ document
     .forEach((el) => {
         aboutObserver.observe(el);
     });
+$("#enquiryForm").validate({
+    rules: {
+        name: {
+            required: true,
+            minlength: 3,
+        },
+        phone: {
+            required: true,
+            digits: true,
+            minlength: 10,
+            maxlength: 10,
+        },
+        email: {
+            email: true,
+            required: true,
+        },
+        city: {
+            maxlength: 100,
+            required: true,
+        },
+        message: {
+            required: true,
+            minlength: 10,
+        },
+    },
+
+    messages: {
+        name: {
+            required: "Please enter your name.",
+            minlength: "Name must be at least 3 characters.",
+        },
+        phone: {
+            required: "Please enter your phone number.",
+            digits: "Only numbers are allowed.",
+            minlength: "Phone number must be 10 digits.",
+            maxlength: "Phone number must be 10 digits.",
+        },
+        email: {
+            required: "Please enter your email.",
+            email: "Please enter a valid email address.",
+        },
+        city: {
+            required: "Please enter your city.",
+            maxlength: "City name is too long.",
+        },
+        message: {
+            required: "Please enter your enquiry.",
+            minlength: "Message must be at least 10 characters.",
+        },
+    },
+
+    errorElement: "span",
+    errorClass: "text-danger",
+
+    highlight: function (element) {
+        $(element).addClass("is-invalid");
+    },
+
+    unhighlight: function (element) {
+        $(element).removeClass("is-invalid");
+    },
+
+    submitHandler: function (form) {
+        form.submit();
+    },
+});
+// ── Navbar scroll effect ──
+const navbarEl = document.querySelector(".navbar");
+if (navbarEl) {
+    window.addEventListener("scroll", () => {
+        navbarEl.classList.toggle("scrolled", window.scrollY > 50);
+    });
+}
+
+// ── Mobile Menu ──
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.querySelector(".nav-links");
+const navPhone = document.querySelector(".nav-phone");
+
+if (hamburger) {
+    hamburger.addEventListener("click", () => {
+        navLinks?.classList.toggle("mobile-open");
+        navPhone?.classList.toggle("mobile-open");
+        hamburger.textContent =
+            hamburger.textContent.trim() === "☰" ? "✕" : "☰";
+    });
+}
+
+// Close menu when a nav link is clicked
+document.querySelectorAll(".nav-links a").forEach((link) => {
+    link.addEventListener("click", () => {
+        navLinks?.classList.remove("mobile-open");
+        navPhone?.classList.remove("mobile-open");
+        if (hamburger) hamburger.textContent = "☰";
+    });
+});

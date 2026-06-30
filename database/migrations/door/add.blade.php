@@ -10,8 +10,7 @@
                                     {{-- <small class="text-body float-end">Default label</small> --}}
                                 </div>
                                 <div class="card-body">
-                                    <form id="add_door_form" method="POST" action="{{ route('door.store') }}"
-                                        enctype="multipart/form-data">
+                                    <form id="add_door_form" method="POST" action="{{ route('door.store') }}"  enctype="multipart/form-data">
                                         @csrf
                                         <div class="mb-6">
                                             <label class="form-label" for="name">Door Name</label>
@@ -28,6 +27,11 @@
                                             <label class="form-label" for="price">Market Price</label>
                                             <input type="number" step="0.01" class="form-control" id="market_price"
                                                 name="market_price" placeholder="e.g. 250">
+                                        </div>
+                                               <div class="mb-6">
+                                            <label class="form-label" for="price">Unit</label>
+                                            <input type="number" step="0.01" class="form-control" id="unit"
+                                                name="unit" placeholder="e.g. sheet etc.">
                                         </div>
                                         <div class="mb-6">
                                             <label class="form-label" for="image"> Image</label>
@@ -51,7 +55,7 @@
 
 
                                         <button type="submit" class="btn btn-primary">
-                                            Save Menu
+                                            Save 
                                         </button>
                                     </form>
                                 </div>

@@ -42,8 +42,11 @@ class PlywoodController extends Controller
 
         $validated = $request->validate([
             'name'         => 'required|string|max:255',
-            'price'        => 'nullable|numeric|min:0',
+            'price'        => 'nullable|numeric|min:0|lte:market_price',
             'market_price' => 'nullable|numeric|min:0',
+        ], [
+            'price.lte' => 'Price must be less than or equal to market price.',
+
         ]);
 
         try {
@@ -57,7 +60,7 @@ class PlywoodController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename  = time() . '.' . $extension;
 
-                $uploadPath = public_path('admin/uploads/plywoods/');
+                $uploadPath = public_path('admins/uploads/plywoods/');
 
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
@@ -125,7 +128,7 @@ class PlywoodController extends Controller
 
             if ($request->hasFile('image')) {
                 if ($menu->image) {
-                    $oldImagePath = public_path('admin/uploads/plywoods/' . $menu->image);
+                    $oldImagePath = public_path('admins/uploads/plywoods/' . $menu->image);
                     if (file_exists($oldImagePath)) {
                         unlink($oldImagePath);
                     }
@@ -135,7 +138,7 @@ class PlywoodController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename  = time() . '.' . $extension;
 
-                $uploadPath = public_path('admin/uploads/plywoods/');
+                $uploadPath = public_path('admins/uploads/plywoods/');
 
                 if (!file_exists($uploadPath)) {
                     mkdir($uploadPath, 0755, true);
@@ -146,7 +149,7 @@ class PlywoodController extends Controller
             }
             $menu->save();
 
-            return redirect()->route('menus')->with('msg_success', 'Plywood edited successfully!');
+            return redirect()->route('plywoods')->with('msg_success', 'Plywood edited successfully!');
         } catch (QueryException $e) {
             DB::rollBack();
             return redirect()->back()->with('msg_error', 'Plywood not Updated' . $e->getMessage());

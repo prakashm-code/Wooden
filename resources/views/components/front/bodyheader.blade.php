@@ -20,7 +20,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact" class="nav-cta">Contact Us</a></li>
         </ul>
-        @if ($settings->phone)
+        @if (!empty($settings->phone))
             <div class="nav-phone">📞 {{ $settings->phone }}</div>
         @endif
         <button class="hamburger" id="hamburger">☰</button>

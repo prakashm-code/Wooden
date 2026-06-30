@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $(
-        "#add_plywood_form, #edit_plywood_form, #add_door_form ,#edit_door_form,#add_blockboard_form,#edit_blockboard_form"
+        "#add_plywood_form, #edit_plywood_form, #add_door_form ,#edit_door_form, #add_blockboard_form, #edit_blockboard_form"
     ).validate({
         rules: {
             name: {
@@ -66,5 +66,42 @@ $(document).ready(function () {
             $(form).find('button[type="submit"]').prop("disabled", true);
             form.submit();
         },
+    });
+});
+
+$(document).on("click", ".delete-link", function () {
+    let link = $(this);
+    let url = link.data("url");
+    let row = link.closest("tr");
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
+                success: function () {
+                    row.css("background", "#ffe5e5");
+                    row.fadeOut(300, function () {
+                        $(this).remove();
+                    });
+                    $("#thali-table").DataTable().ajax.reload(null, false);
+                    toastr.success("Menu Delete Successfully");
+                },
+                error: function () {
+                    toastr.error("Menu Not Delete Successfully");
+                },
+            });
+        }
     });
 });

@@ -11,7 +11,7 @@
 
     <x-admin.header title="{{ $title }}" page={{ $page }} />
     @isset($css)
-        <link rel="stylesheet" href="{{ asset('assets') }}/admin/css/{{ $css }}" />
+        <link rel="stylesheet" href="{{ asset('assets') }}/admins/css/{{ $css }}" />
     @endisset
 
 
